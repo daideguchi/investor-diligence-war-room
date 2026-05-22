@@ -12,8 +12,8 @@
 
 - Live app: https://daideguchi.github.io/investor-diligence-war-room/
 - GitHub repo: https://github.com/daideguchi/investor-diligence-war-room
-- Demo video asset: `media/investor-diligence-war-room-demo-narrated.mp4`
-- Demo video release URL: https://github.com/daideguchi/investor-diligence-war-room/releases/download/v0.1-submission/investor-diligence-war-room-demo-narrated.mp4
+- Demo video: https://youtu.be/_SEP1NyhY1E
+- Backup demo asset: https://github.com/daideguchi/investor-diligence-war-room/releases/download/v0.1-submission/investor-diligence-war-room-demo-narrated.mp4
 - Thumbnail: `media/investor-diligence-war-room-demo-thumb.png`
 
 ## Verification
