@@ -4,6 +4,12 @@ Investor Diligence War Room is a fast AI-era workflow for turning messy startup 
 
 It is being built for Build & Pitch w/ Raylu.
 
+## Public Links
+
+- Live app: https://daideguchi.github.io/investor-diligence-war-room/
+- GitHub repo: https://github.com/daideguchi/investor-diligence-war-room
+- Submission status: not final-submitted yet
+
 ## Judge Quick Read
 
 Target user:
@@ -36,6 +42,16 @@ Investor Diligence War Room creates a memo while separating evidence receipts, a
 ## Screenshot
 
 ![Investor Diligence War Room](media/investor-diligence-war-room-full.png)
+
+## Demo Video Asset
+
+Current local demo asset:
+
+```text
+media/investor-diligence-war-room-demo.webm
+```
+
+This is a silent product walkthrough asset for review and later YouTube/Devpost packaging.
 
 ## AI Proof
 
@@ -91,12 +107,24 @@ python3 scripts/verify_claim_boundary.py
 python3 scripts/verify_no_secrets.py
 ```
 
+Full local check:
+
+```bash
+npm run verify
+```
+
+Record the current product walkthrough:
+
+```bash
+npm run demo:record
+```
+
 ## Submission Boundary
 
 Current status:
 
 ```text
-Public prototype in progress.
+Public prototype live on GitHub Pages.
 No final Devpost submission yet.
 No real investor/customer validation claimed yet.
 ```

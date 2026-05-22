@@ -8,6 +8,12 @@ Investor Diligence War Room
 
 Evidence-aware investment memos from messy startup notes.
 
+## Public Links
+
+- Live app: https://daideguchi.github.io/investor-diligence-war-room/
+- GitHub repo: https://github.com/daideguchi/investor-diligence-war-room
+- Demo video asset: `media/investor-diligence-war-room-demo.webm`
+
 ## Short Pitch
 
 Investor Diligence War Room helps investors turn scattered startup notes into an evidence-aware memo. It separates evidence, assumptions, red flags, and next diligence questions so AI speeds up the work without hiding uncertainty.

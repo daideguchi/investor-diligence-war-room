@@ -1,5 +1,9 @@
 # Devpost Draft — Investor Diligence War Room
 
+Live app: https://daideguchi.github.io/investor-diligence-war-room/
+
+Source code: https://github.com/daideguchi/investor-diligence-war-room
+
 ## Inspiration
 
 Most investor memos fail in one of two ways: they take too long to write, or they sound too confident too early. AI can help with speed, but it can also blur the line between a real signal and a guess.
