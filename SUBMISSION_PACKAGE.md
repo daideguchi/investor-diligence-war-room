@@ -8,6 +8,16 @@ Investor Diligence War Room
 
 Evidence-aware investment memos from messy startup notes.
 
+## One-Sentence Pitch
+
+For investors who need to review startups fast, Investor Diligence War Room turns messy notes into an evidence-capped memo so speed does not become overconfidence.
+
+## Who / Problem / How
+
+- Who: scouts, angels, accelerators, and early-stage investors reviewing many companies quickly.
+- Problem: AI can draft polished diligence memos, but polished text can hide weak evidence, assumptions, and red flags.
+- How: the app separates evidence, assumptions, risk, score caps, and next investor questions before exporting the memo.
+
 ## Public Links
 
 - Live app: https://daideguchi.github.io/investor-diligence-war-room/

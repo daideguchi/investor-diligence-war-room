@@ -59,6 +59,11 @@ try {
     throw new Error(`unexpected guardrail text: ${guardrail}`);
   }
 
+  const body = await page.locator('body').innerText();
+  if (!body.includes('One-Sentence Pitch') || !body.includes('judge hook') || !body.includes('speed does not become overconfidence')) {
+    throw new Error('missing one-sentence judge hook');
+  }
+
   const cards = await page.locator('.card').count();
   if (cards < 10) {
     throw new Error(`not enough cards: ${cards}`);

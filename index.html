@@ -107,6 +107,18 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
     }
+    .pitch-strip {
+      grid-column: 1 / -1;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+    .pitch-line {
+      font-size: 18px;
+      color: var(--ink);
+      font-weight: 800;
+      max-width: 1120px;
+    }
     .metric {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -220,6 +232,19 @@
       <div class="metric"><strong id="riskMetric">4</strong><span>red flags to diligence</span></div>
       <div class="metric"><strong id="questionMetric">6</strong><span>next investor questions</span></div>
     </div>
+
+    <section class="pitch-strip" aria-label="one sentence pitch">
+      <div class="panel-title">
+        <h2>One-Sentence Pitch</h2>
+        <span class="pill good">judge hook</span>
+      </div>
+      <p class="pitch-line">For investors who need to review startups fast, Investor Diligence War Room turns messy notes into an evidence-capped memo so speed does not become overconfidence.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Who</h3><p>Scouts, angels, accelerators, and early-stage investors reviewing more companies than they can deeply research.</p></div>
+        <div class="card"><h3>Pain</h3><p>AI can write a polished memo quickly, but it can blur evidence, assumptions, red flags, and investor judgment.</p></div>
+        <div class="card"><h3>Judge Signal</h3><p>The product does not just draft faster. It makes uncertainty visible, caps weak evidence, and exports the next diligence plan.</p></div>
+      </div>
+    </section>
 
     <aside>
       <div class="stack">

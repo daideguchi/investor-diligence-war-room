@@ -14,6 +14,12 @@ It is being built for Build & Pitch w/ Raylu.
 
 ## Judge Quick Read
 
+One-sentence pitch:
+
+```text
+For investors who need to review startups fast, Investor Diligence War Room turns messy notes into an evidence-capped memo so speed does not become overconfidence.
+```
+
 Target user:
 
 ```text
@@ -30,6 +36,12 @@ Solution:
 
 ```text
 Investor Diligence War Room creates a memo while separating evidence receipts, assumptions, red flags, and next investor questions. It keeps the investor in control and labels the score as a working hypothesis, not a fact.
+```
+
+Judge signal:
+
+```text
+This is not just "AI writes an investor memo." The winning mechanism is the evidence score guardrail: the product can move fast while visibly preventing weak proof from looking stronger than it is.
 ```
 
 ## What It Does
