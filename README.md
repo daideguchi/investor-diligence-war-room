@@ -9,7 +9,8 @@ It is being built for Build & Pitch w/ Raylu.
 - Live app: https://daideguchi.github.io/investor-diligence-war-room/
 - GitHub repo: https://github.com/daideguchi/investor-diligence-war-room
 - Release assets: https://github.com/daideguchi/investor-diligence-war-room/releases/tag/v0.1-submission
-- Submission status: not final-submitted yet
+- Devpost project: https://devpost.com/software/investor-diligence-war-room
+- Submission status: submitted on Devpost
 
 ## Judge Quick Read
 
@@ -35,6 +36,7 @@ Investor Diligence War Room creates a memo while separating evidence receipts, a
 
 - Takes company, website, stage, market, and raw notes.
 - Generates an investability hypothesis.
+- Caps the score when evidence is too thin.
 - Separates evidence from assumptions.
 - Builds red flags and next diligence questions.
 - Exports a Markdown memo.
@@ -147,6 +149,6 @@ Current status:
 
 ```text
 Public prototype live on GitHub Pages.
-No final Devpost submission yet.
+Final Devpost submission completed for Build & Pitch w/ Raylu.
 No real investor/customer validation claimed yet.
 ```

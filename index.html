@@ -285,6 +285,17 @@
 
       <div>
         <div class="panel-title">
+          <h2>Evidence Score Guardrail</h2>
+          <span class="pill warn" id="guardrailPill">evidence cap</span>
+        </div>
+        <div class="card">
+          <h3 id="guardrailTitle">Score is capped until stronger proof is attached</h3>
+          <p id="guardrailText">Notes-only diligence can create a useful hypothesis, but it should not look more certain than the evidence allows.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-title">
           <h2>Evidence vs Assumptions</h2>
           <span class="pill">no fake validation</span>
         </div>
@@ -360,7 +371,7 @@
       ]
     };
 
-    function scoreCompany(notes, stage) {
+    function rawScoreCompany(notes, stage) {
       const lower = notes.toLowerCase();
       let score = 50;
       ['workflow', 'team', 'customer', 'user', 'pay', 'risk', 'governance', 'audit', 'evidence'].forEach((word) => {
@@ -370,6 +381,32 @@
       if (stage === 'growth') score -= 4;
       if (!lower.includes('pay') && !lower.includes('revenue')) score -= 8;
       return Math.max(22, Math.min(91, score));
+    }
+
+    function applyEvidenceCap(rawScore, evidenceMode, notes) {
+      const lower = notes.toLowerCase();
+      const caps = {
+        'notes only': 72,
+        'public website plus notes': 78,
+        'customer call notes': 82,
+        'data room summary': 86
+      };
+      let cap = caps[evidenceMode] || 72;
+      const strongSignals = ['revenue', 'paying customer', 'contract', 'signed', 'retention', 'data room'];
+      if (strongSignals.some((signal) => lower.includes(signal))) {
+        cap = Math.min(91, cap + 5);
+      }
+      const score = Math.min(rawScore, cap);
+      const capped = score < rawScore;
+      return {
+        rawScore,
+        score,
+        cap,
+        capped,
+        message: capped
+          ? `Raw score ${rawScore} was capped at ${cap} because the current evidence mode is "${evidenceMode}". Attach stronger proof before treating this as a high-confidence memo.`
+          : `Raw score ${rawScore} is within the ${cap}-point cap for "${evidenceMode}". Keep the score labeled as a working hypothesis until proof is attached.`
+      };
     }
 
     function bulletsFrom(patternList, notes, fallback) {
@@ -387,7 +424,8 @@
       const market = $('market').value.trim() || 'unspecified market';
       const notes = $('notes').value.trim() || 'No notes provided.';
       const evidenceMode = $('evidenceMode').value;
-      const score = scoreCompany(notes, stage);
+      const guardrail = applyEvidenceCap(rawScoreCompany(notes, stage), evidenceMode, notes);
+      const score = guardrail.score;
 
       const evidence = bulletsFrom(patterns.evidence, notes, [
         'Only user-provided notes are available.',
@@ -420,7 +458,7 @@
           : 'Interesting idea, but not investable without sharper proof';
       const claimBoundary = 'Working diligence hypothesis only. Not investment advice. No verified customer, revenue, or live-web claims unless attached as evidence receipts.';
 
-      return { company, website, stage, market, notes, evidenceMode, score, thesis, evidence, assumptions, risks, questions, claimBoundary };
+      return { company, website, stage, market, notes, evidenceMode, score, thesis, evidence, assumptions, risks, questions, guardrail, claimBoundary };
     }
 
     function renderList(id, items) {
@@ -444,9 +482,14 @@ Market: ${packet.market}
 Source: ${packet.website}
 Evidence mode: ${packet.evidenceMode}
 Investability hypothesis: ${packet.score}/100
+Raw score before evidence cap: ${packet.guardrail.rawScore}/100
+Evidence cap: ${packet.guardrail.cap}/100
 
 ## Thesis
 ${packet.thesis}
+
+## Evidence Score Guardrail
+${packet.guardrail.message}
 
 ## Evidence Receipts
 ${packet.evidence.map((item) => `- ${item}`).join('\n')}
@@ -474,6 +517,12 @@ ${packet.claimBoundary}`;
       $('questionMetric').textContent = packet.questions.length;
       $('thesisTitle').textContent = packet.thesis;
       $('thesisText').textContent = `${packet.company} may be worth a deeper call if the team can prove a repeated workflow, a budget owner, and a measurable before/after outcome.`;
+      $('guardrailPill').textContent = packet.guardrail.capped ? 'score capped' : 'cap clear';
+      $('guardrailPill').className = `pill ${packet.guardrail.capped ? 'warn' : 'good'}`;
+      $('guardrailTitle').textContent = packet.guardrail.capped
+        ? 'Score was capped by evidence quality'
+        : 'Score is within the evidence cap';
+      $('guardrailText').textContent = packet.guardrail.message;
       renderList('evidenceList', packet.evidence);
       renderList('assumptionList', packet.assumptions);
       renderCards('riskGrid', packet.risks, 'Risk');

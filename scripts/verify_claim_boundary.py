@@ -18,6 +18,8 @@ checks = {
     ],
     "index.html": [
         "working hypothesis",
+        "Evidence Score Guardrail",
+        "Score is capped",
         "It does not claim verified revenue",
         "Claim boundary",
     ],
@@ -30,4 +32,3 @@ for rel, markers in checks.items():
         raise SystemExit(f"{rel} missing markers: {missing}")
 
 print("investor_diligence_claim_boundary_ok")
-

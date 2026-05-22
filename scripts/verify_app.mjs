@@ -48,10 +48,15 @@ try {
   }
 
   const memo = await page.locator('#memo').innerText();
-  for (const marker of ['Evidence Receipts', 'Assumptions To Verify', 'Red Flags', 'Next Investor Questions', 'Claim Boundary']) {
+  for (const marker of ['Evidence Score Guardrail', 'Evidence Receipts', 'Assumptions To Verify', 'Red Flags', 'Next Investor Questions', 'Claim Boundary']) {
     if (!memo.includes(marker)) {
       throw new Error(`memo missing marker: ${marker}`);
     }
+  }
+
+  const guardrail = await page.locator('#guardrailText').innerText();
+  if (!guardrail.includes('capped') || !guardrail.includes('evidence mode')) {
+    throw new Error(`unexpected guardrail text: ${guardrail}`);
   }
 
   const cards = await page.locator('.card').count();

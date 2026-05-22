@@ -23,7 +23,7 @@ The problem is simple: early diligence is messy. A reviewer may have a company w
 
 This product is built around that boundary.
 
-The app takes a company name, website, stage, market, and raw notes. It produces an investability hypothesis, evidence receipts, assumptions to verify, red flags, next investor questions, and an exportable Markdown memo. The score is deliberately labeled as a working hypothesis, not an investment decision. Revenue, customers, and market claims stay unverified unless proof is attached.
+The app takes a company name, website, stage, market, and raw notes. It produces an investability hypothesis, evidence receipts, assumptions to verify, red flags, next investor questions, and an exportable Markdown memo. The score is deliberately labeled as a working hypothesis, not an investment decision. It also includes an Evidence Score Guardrail: notes-only diligence can still generate a memo, but the score is capped until stronger proof such as public sources, customer calls, contracts, revenue, or a data-room summary is attached. Revenue, customers, and market claims stay unverified unless proof is attached.
 
 The novel insight is that investor AI tooling should not only make memos faster. It should make uncertainty easier to see. The workflow is not a generic chatbot; it is a structured diligence room that turns the output into a call plan and review artifact.
 
@@ -36,6 +36,7 @@ The business wedge is practical: scouts and investors already work in memos, and
 The app produces:
 
 - an investability hypothesis
+- an evidence-based score cap
 - evidence receipts
 - assumptions to verify
 - red flags
