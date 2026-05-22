@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "verify": "node scripts/verify_app.mjs && python3 scripts/verify_claim_boundary.py && python3 scripts/verify_demo_assets.py && python3 scripts/verify_no_secrets.py",
+    "verify": "node scripts/verify_app.mjs && python3 scripts/verify_claim_boundary.py && python3 scripts/verify_demo_assets.py && python3 scripts/verify_japanese_support.py && python3 scripts/verify_no_secrets.py",
     "demo:record": "node scripts/record_demo.mjs",
     "demo:narrated": "bash scripts/build_narrated_demo.sh"
   },

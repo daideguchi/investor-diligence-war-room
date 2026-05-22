@@ -11,6 +11,7 @@ It is being built for Build & Pitch w/ Raylu.
 - Release assets: https://github.com/daideguchi/investor-diligence-war-room/releases/tag/v0.1-submission
 - Devpost project: https://devpost.com/software/investor-diligence-war-room
 - Submission status: submitted on Devpost
+- Japanese README: [README.ja.md](README.ja.md)
 
 ## Judge Quick Read
 

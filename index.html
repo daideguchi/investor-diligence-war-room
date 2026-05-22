@@ -57,6 +57,35 @@
       white-space: nowrap;
       font-size: 13px;
     }
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .lang-toggle {
+      display: inline-flex;
+      gap: 4px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-2);
+    }
+    .lang-toggle button {
+      width: auto;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border-color: transparent;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .lang-toggle button.active {
+      background: var(--brand);
+      color: #fff;
+    }
     main {
       display: grid;
       grid-template-columns: minmax(320px, 390px) 1fr;
@@ -213,6 +242,7 @@
       aside { position: static; }
       .hero-strip, .grid-3, .grid-2, .row { grid-template-columns: 1fr; }
       header { align-items: flex-start; flex-direction: column; }
+      .header-actions { justify-content: flex-start; }
     }
   </style>
 </head>
@@ -222,7 +252,13 @@
       <h1>Investor Diligence War Room</h1>
       <p class="tagline">A fast investor workflow for turning messy startup notes into an evidence-aware memo, red-flag map, and next diligence plan.</p>
     </div>
-    <span class="badge">Raylu build candidate</span>
+    <div class="header-actions">
+      <span class="badge">Raylu build candidate</span>
+      <div class="lang-toggle" aria-label="Language">
+        <button type="button" class="active" data-lang-button="en">EN</button>
+        <button type="button" data-lang-button="ja">日本語</button>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -264,10 +300,10 @@
           <label>
             Stage
             <select id="stage">
-              <option>pre-seed</option>
-              <option selected>seed</option>
-              <option>series A</option>
-              <option>growth</option>
+              <option value="pre-seed">pre-seed</option>
+              <option value="seed" selected>seed</option>
+              <option value="series A">series A</option>
+              <option value="growth">growth</option>
             </select>
           </label>
           <label>
@@ -282,10 +318,10 @@
         <label>
           Evidence mode
           <select id="evidenceMode">
-            <option selected>notes only</option>
-            <option>public website plus notes</option>
-            <option>customer call notes</option>
-            <option>data room summary</option>
+            <option value="notes only" selected>notes only</option>
+            <option value="public website plus notes">public website plus notes</option>
+            <option value="customer call notes">customer call notes</option>
+            <option value="data room summary">data room summary</option>
           </select>
         </label>
         <button id="buildBtn">Build Diligence Memo</button>
@@ -377,35 +413,170 @@
 
   <script>
     const $ = (id) => document.getElementById(id);
+    let currentLang = 'en';
+
+    const translations = {
+      ja: {
+        'Investor Diligence War Room': '投資デューデリジェンス司令室',
+        'A fast investor workflow for turning messy startup notes into an evidence-aware memo, red-flag map, and next diligence plan.': '散らかったスタートアップ調査メモを、証拠を意識した投資メモ、リスク整理、次の質問に変える投資家向けワークフローです。',
+        'Raylu build candidate': 'Raylu提出候補',
+        'investability hypothesis': '投資可能性の仮説',
+        'evidence receipts': '証拠メモ',
+        'red flags to diligence': '深掘りすべきリスク',
+        'next investor questions': '次に聞く投資家質問',
+        'One-Sentence Pitch': '一言でいうと',
+        'judge hook': '審査員向けの刺しどころ',
+        'For investors who need to review startups fast, Investor Diligence War Room turns messy notes into an evidence-capped memo so speed does not become overconfidence.': '多くのスタートアップを素早く見る投資家のために、散らかったメモを「証拠で上限をかけた投資メモ」に変え、速さが過信に変わらないようにします。',
+        'Who': '誰のため',
+        'Scouts, angels, accelerators, and early-stage investors reviewing more companies than they can deeply research.': '深く調べ切れない数の会社を見るスカウト、エンジェル、アクセラレーター、初期投資家のためです。',
+        'Pain': '困りごと',
+        'AI can write a polished memo quickly, but it can blur evidence, assumptions, red flags, and investor judgment.': 'AIはきれいな投資メモを素早く書けますが、証拠、仮説、リスク、人間の判断を混ぜてしまう危険があります。',
+        'Judge Signal': '勝ち筋',
+        'The product does not just draft faster. It makes uncertainty visible, caps weak evidence, and exports the next diligence plan.': 'ただ速く書くだけではありません。不確実な点を見える化し、弱い証拠には上限をかけ、次の調査計画まで出します。',
+        'Company Intake': '会社情報の入力',
+        'human approval': '人間が承認',
+        'Company or product': '会社名またはプロダクト',
+        'Website / source': 'Webサイト / 情報源',
+        'Stage': 'ステージ',
+        'Market': '市場',
+        'Raw notes': '生メモ',
+        'Evidence mode': '証拠モード',
+        'Build Diligence Memo': '投資メモを作る',
+        'Copy Markdown Memo': 'Markdownメモをコピー',
+        'Investment Snapshot': '投資スナップショット',
+        'working hypothesis': '作業仮説',
+        'Evidence Score Guardrail': '証拠スコアの安全装置',
+        'evidence cap': '証拠による上限',
+        'Score is capped until stronger proof is attached': '強い証拠が付くまでスコアに上限をかけます',
+        'Notes-only diligence can create a useful hypothesis, but it should not look more certain than the evidence allows.': 'メモだけでも有用な仮説は作れますが、証拠以上に確実そうに見せてはいけません。',
+        'Evidence vs Assumptions': '証拠と仮説',
+        'no fake validation': '偽の検証にしない',
+        'Evidence Receipts': '証拠メモ',
+        'Assumptions To Verify': '確認すべき仮説',
+        'Risk Map': 'リスクマップ',
+        'do not skip': '飛ばさない',
+        'Next Investor Questions': '次に聞く投資家質問',
+        'call plan': '面談計画',
+        'Exportable Memo': '出力できるメモ',
+        'human signs off': '人間が最終確認',
+        'AI Proof': 'AI動作証拠',
+        'Gemini smoke test': 'Gemini動作確認',
+        'Model proof loading': 'モデル動作証拠を読み込み中',
+        'The public app displays a sanitized model-call proof when the proof JSON is available. The proof never includes API keys or private service-account content.': '公開アプリは、公開してよい形に整えたモデル呼び出し証拠だけを表示します。APIキーやサービスアカウントの秘密情報は含めません。',
+        'Claim boundary: this app creates a diligence hypothesis from user-provided notes. It does not claim verified revenue, customer validation, live web extraction, or investment advice unless those proof sources are attached.': '主張の境界: このアプリは、ユーザーが入力したメモから投資調査の仮説を作ります。証拠が添付されていない限り、売上確認、顧客検証、ライブWeb抽出、投資助言は主張しません。',
+        'Promising but proof-light diligence candidate': '有望だが証拠がまだ薄い投資検討候補',
+        'Credible wedge into a painful investor or operator workflow': '投資家または運用者の痛い業務に入り込む有力な切り口',
+        'Interesting idea, but not investable without sharper proof': '面白いが、より鋭い証拠なしでは投資判断できない',
+        'Team and operator workflow are mentioned in the source notes.': 'チームと運用ワークフローがメモ内に出ています。',
+        'User or customer language appears in the source notes.': 'ユーザーまたは顧客に関する言葉がメモ内に出ています。',
+        'Payment willingness is directly mentioned as a question or signal.': '支払い意思が、質問またはシグナルとして直接出ています。',
+        'The source notes already include risk language.': 'メモ内にすでにリスクに関する言葉があります。',
+        'The product appears to own a repeated workflow, not only a static report.': '静的なレポートだけでなく、繰り返し発生する業務を扱っています。',
+        'Compliance or audit pressure appears as a possible urgency driver.': 'コンプライアンスまたは監査圧力が、緊急性の要因として出ています。',
+        'The buyer has a painful recurring workflow.': '買い手には痛みのある反復業務があります。',
+        'The product reduces time, risk, or missed diligence questions enough to justify payment.': '支払いを正当化できるほど、時間、リスク、見落としを減らせる可能性があります。',
+        'The team can produce proof beyond a polished demo.': 'チームは、きれいなデモ以上の証拠を出せる必要があります。',
+        'The workflow can be repeated across multiple companies or funds.': 'このワークフローは複数の会社やファンドで再利用できる必要があります。',
+        'Payment risk: willingness to pay is not proven.': '支払いリスク: 支払い意思はまだ証明されていません。',
+        'Timing risk: compliance pressure may not be urgent yet.': 'タイミングリスク: コンプライアンス圧力はまだ緊急ではない可能性があります。',
+        'pre-seed': 'プレシード',
+        'seed': 'シード',
+        'series A': 'シリーズA',
+        'growth': 'グロース',
+        'notes only': 'メモのみ',
+        'public website plus notes': '公開Webサイト + メモ',
+        'customer call notes': '顧客面談メモ',
+        'data room summary': 'データルーム要約',
+        'Unclear buyer: confirm who owns budget and urgency.': '買い手が不明: 予算と緊急度を誰が持っているか確認してください。',
+        'Competitive risk: incumbents may bundle the workflow.': '競争リスク: 既存企業が同じ業務をまとめて提供する可能性があります。',
+        'Data risk: evidence quality depends on source notes.': 'データリスク: 証拠の質は入力メモに依存します。',
+        'Only user-provided notes are available.': 'ユーザーが入力したメモだけが利用可能です。',
+        'No customer, revenue, or live web proof is attached yet.': '顧客、売上、ライブWebの証拠はまだ添付されていません。',
+        'Customer validation is not attached.': '顧客検証は添付されていません。',
+        'Revenue is not attached.': '売上証拠は添付されていません。',
+        'Competitive landscape is not attached.': '競合環境の証拠は添付されていません。',
+        'Data quality depends on the source notes.': 'データ品質は入力メモに依存します。',
+        'score capped': 'スコア上限あり',
+        'cap clear': '上限内',
+        'Score was capped by evidence quality': '証拠の質によりスコアに上限をかけました',
+        'Score is within the evidence cap': 'スコアは証拠上限の範囲内です',
+        'Unnamed company': '会社名未入力',
+        'not provided': '未入力',
+        'unspecified market': '市場未入力',
+        'No notes provided.': 'メモが入力されていません。'
+      }
+    };
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+      document.querySelectorAll('[data-lang-button]').forEach((button) => {
+        button.classList.toggle('active', button.dataset.langButton === lang);
+      });
+      const map = translations[lang] || {};
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      for (const node of nodes) {
+        const parent = node.parentElement;
+        if (!parent || ['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT'].includes(parent.tagName)) continue;
+        if (!node.datasetOriginalText) node.datasetOriginalText = node.nodeValue;
+        const original = node.datasetOriginalText.trim();
+        if (!original) continue;
+        node.nodeValue = node.datasetOriginalText.replace(original, map[original] || original);
+      }
+    }
 
     const patterns = {
       evidence: [
-        ['team', 'Team and operator workflow are mentioned in the source notes.'],
-        ['user', 'User or customer language appears in the source notes.'],
-        ['pay', 'Payment willingness is directly mentioned as a question or signal.'],
-        ['risk', 'The source notes already include risk language.'],
-        ['workflow', 'The product appears to own a repeated workflow, not only a static report.'],
-        ['compliance', 'Compliance or audit pressure appears as a possible urgency driver.']
+        ['team|チーム', 'Team and operator workflow are mentioned in the source notes.'],
+        ['user|customer|ユーザー|顧客', 'User or customer language appears in the source notes.'],
+        ['pay|payment|revenue|支払|売上', 'Payment willingness is directly mentioned as a question or signal.'],
+        ['risk|リスク', 'The source notes already include risk language.'],
+        ['workflow|ワークフロー|業務', 'The product appears to own a repeated workflow, not only a static report.'],
+        ['compliance|audit|コンプライアンス|監査', 'Compliance or audit pressure appears as a possible urgency driver.']
       ],
       risks: [
-        ['buyer', 'Unclear buyer: confirm who owns budget and urgency.'],
-        ['pay', 'Payment risk: willingness to pay is not proven.'],
-        ['competition', 'Competitive risk: incumbents may bundle the workflow.'],
-        ['data', 'Data risk: evidence quality depends on source notes.'],
-        ['compliance', 'Timing risk: compliance pressure may not be urgent yet.']
+        ['buyer|買い手|予算', 'Unclear buyer: confirm who owns budget and urgency.'],
+        ['pay|payment|支払', 'Payment risk: willingness to pay is not proven.'],
+        ['competition|競合', 'Competitive risk: incumbents may bundle the workflow.'],
+        ['data|データ|証拠', 'Data risk: evidence quality depends on source notes.'],
+        ['compliance|コンプライアンス|監査', 'Timing risk: compliance pressure may not be urgent yet.']
       ]
     };
+
+    const sampleInputs = {
+      en: {
+        market: 'AI workflow governance',
+        notes: 'Team sells an AI operations console for companies that need evidence-aware workflows, human approval gates, and audit-ready launch decisions. Early users are small AI teams and solo founders. Main risk is whether teams pay before compliance pressure becomes urgent.'
+      },
+      ja: {
+        market: 'AIワークフローガバナンス',
+        notes: 'チームは、証拠を意識したワークフロー、人間承認ゲート、監査に耐えるローンチ判断を必要とする会社向けに、AI運用コンソールを販売しています。初期ユーザーは小規模AIチームと個人創業者です。主なリスクは、コンプライアンス圧力が緊急になる前に、チームが支払うかどうかです。'
+      }
+    };
+
+    function syncSampleInputs(lang) {
+      const next = sampleInputs[lang];
+      const other = sampleInputs[lang === 'ja' ? 'en' : 'ja'];
+      if ($('market').value === other.market || $('market').value === next.market) $('market').value = next.market;
+      if ($('notes').value === other.notes || $('notes').value === next.notes) $('notes').value = next.notes;
+    }
 
     function rawScoreCompany(notes, stage) {
       const lower = notes.toLowerCase();
       let score = 50;
-      ['workflow', 'team', 'customer', 'user', 'pay', 'risk', 'governance', 'audit', 'evidence'].forEach((word) => {
+      ['workflow', 'team', 'customer', 'user', 'pay', 'risk', 'governance', 'audit', 'evidence', 'ワークフロー', 'チーム', '顧客', 'ユーザー', '支払', 'リスク', 'ガバナンス', '監査', '証拠'].forEach((word) => {
         if (lower.includes(word)) score += 4;
       });
       if (stage === 'seed') score += 4;
       if (stage === 'growth') score -= 4;
-      if (!lower.includes('pay') && !lower.includes('revenue')) score -= 8;
+      if (!lower.includes('pay') && !lower.includes('revenue') && !lower.includes('支払') && !lower.includes('売上')) score -= 8;
       return Math.max(22, Math.min(91, score));
+    }
+
+    function localizeGenerated(value) {
+      return currentLang === 'ja' ? (translations.ja[value] || value) : value;
     }
 
     function applyEvidenceCap(rawScore, evidenceMode, notes) {
@@ -417,12 +588,23 @@
         'data room summary': 86
       };
       let cap = caps[evidenceMode] || 72;
-      const strongSignals = ['revenue', 'paying customer', 'contract', 'signed', 'retention', 'data room'];
+      const strongSignals = ['revenue', 'paying customer', 'contract', 'signed', 'retention', 'data room', '売上', '支払う顧客', '契約', '署名', '継続率', 'データルーム'];
       if (strongSignals.some((signal) => lower.includes(signal))) {
         cap = Math.min(91, cap + 5);
       }
       const score = Math.min(rawScore, cap);
       const capped = score < rawScore;
+      if (currentLang === 'ja') {
+        return {
+          rawScore,
+          score,
+          cap,
+          capped,
+          message: capped
+            ? `生スコア ${rawScore} は、現在の証拠モードが「${localizeGenerated(evidenceMode)}」のため ${cap} に上限設定されました。高い確信度のメモとして扱う前に、より強い証拠を添付してください。`
+            : `生スコア ${rawScore} は、「${localizeGenerated(evidenceMode)}」の上限 ${cap} の範囲内です。証拠が添付されるまで、作業仮説として扱ってください。`
+        };
+      }
       return {
         rawScore,
         score,
@@ -437,17 +619,17 @@
     function bulletsFrom(patternList, notes, fallback) {
       const lower = notes.toLowerCase();
       const matches = patternList
-        .filter(([word]) => lower.includes(word))
+        .filter(([word]) => word.split('|').some((token) => lower.includes(token)))
         .map(([, text]) => text);
       return matches.length ? matches : fallback;
     }
 
     function buildPacket() {
-      const company = $('company').value.trim() || 'Unnamed company';
-      const website = $('website').value.trim() || 'not provided';
+      const company = $('company').value.trim() || (currentLang === 'ja' ? '会社名未入力' : 'Unnamed company');
+      const website = $('website').value.trim() || (currentLang === 'ja' ? '未入力' : 'not provided');
       const stage = $('stage').value;
-      const market = $('market').value.trim() || 'unspecified market';
-      const notes = $('notes').value.trim() || 'No notes provided.';
+      const market = $('market').value.trim() || (currentLang === 'ja' ? '市場未入力' : 'unspecified market');
+      const notes = $('notes').value.trim() || (currentLang === 'ja' ? 'メモが入力されていません。' : 'No notes provided.');
       const evidenceMode = $('evidenceMode').value;
       const guardrail = applyEvidenceCap(rawScoreCompany(notes, stage), evidenceMode, notes);
       const score = guardrail.score;
@@ -469,37 +651,74 @@
         'Data quality depends on the source notes.'
       ]);
       const questions = [
-        `Who is the first buyer for ${company}, and what budget do they control?`,
-        'What job is currently done manually, and how many hours does it consume?',
-        'What proof shows a user would pay this month?',
-        'Which part of the memo is evidence, and which part is assumption?',
-        'What competitor or internal workflow would block adoption?',
-        'What metric improves after one week of use?'
+        currentLang === 'ja' ? `${company} の最初の買い手は誰で、どの予算を持っていますか？` : `Who is the first buyer for ${company}, and what budget do they control?`,
+        currentLang === 'ja' ? '現在手作業で行っている仕事は何で、何時間かかっていますか？' : 'What job is currently done manually, and how many hours does it consume?',
+        currentLang === 'ja' ? '今月ユーザーが支払うと示す証拠は何ですか？' : 'What proof shows a user would pay this month?',
+        currentLang === 'ja' ? 'メモのどの部分が証拠で、どの部分が仮説ですか？' : 'Which part of the memo is evidence, and which part is assumption?',
+        currentLang === 'ja' ? '導入を妨げる競合や社内ワークフローは何ですか？' : 'What competitor or internal workflow would block adoption?',
+        currentLang === 'ja' ? '1週間使った後に改善する指標は何ですか？' : 'What metric improves after one week of use?'
       ];
       const thesis = score >= 74
         ? 'Credible wedge into a painful investor or operator workflow'
         : score >= 58
           ? 'Promising but proof-light diligence candidate'
           : 'Interesting idea, but not investable without sharper proof';
-      const claimBoundary = 'Working diligence hypothesis only. Not investment advice. No verified customer, revenue, or live-web claims unless attached as evidence receipts.';
+      const claimBoundary = currentLang === 'ja'
+        ? '投資調査の作業仮説のみです。投資助言ではありません。証拠メモとして添付されていない限り、顧客、売上、ライブWeb情報を検証済みとは主張しません。'
+        : 'Working diligence hypothesis only. Not investment advice. No verified customer, revenue, or live-web claims unless attached as evidence receipts.';
 
       return { company, website, stage, market, notes, evidenceMode, score, thesis, evidence, assumptions, risks, questions, guardrail, claimBoundary };
     }
 
     function renderList(id, items) {
-      $(id).innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+      $(id).innerHTML = items.map((item) => `<li>${escapeHtml(localizeGenerated(item))}</li>`).join('');
     }
 
     function renderCards(id, items, type) {
+      const label = currentLang === 'ja'
+        ? (type === 'Risk' ? 'リスク' : type === 'Question' ? '質問' : type)
+        : type;
       $(id).innerHTML = items.map((item, idx) => `
         <div class="card">
-          <h3>${type} ${idx + 1}</h3>
-          <p>${escapeHtml(item)}</p>
+          <h3>${label} ${idx + 1}</h3>
+          <p>${escapeHtml(localizeGenerated(item))}</p>
         </div>
       `).join('');
     }
 
     function memoMarkdown(packet) {
+      if (currentLang === 'ja') {
+        return `# 投資デューデリジェンスメモ: ${packet.company}
+
+ステージ: ${localizeGenerated(packet.stage)}
+市場: ${packet.market}
+情報源: ${packet.website}
+証拠モード: ${localizeGenerated(packet.evidenceMode)}
+投資可能性の仮説: ${packet.score}/100
+証拠上限前の生スコア: ${packet.guardrail.rawScore}/100
+証拠による上限: ${packet.guardrail.cap}/100
+
+## 投資仮説
+${localizeGenerated(packet.thesis)}
+
+## 証拠スコアの安全装置
+${packet.guardrail.message}
+
+## 証拠メモ
+${packet.evidence.map((item) => `- ${localizeGenerated(item)}`).join('\n')}
+
+## 確認すべき仮説
+${packet.assumptions.map((item) => `- ${localizeGenerated(item)}`).join('\n')}
+
+## リスク
+${packet.risks.map((item) => `- ${localizeGenerated(item)}`).join('\n')}
+
+## 次に聞く投資家質問
+${packet.questions.map((item) => `- ${item}`).join('\n')}
+
+## 主張の境界
+${packet.claimBoundary}`;
+      }
       return `# Investor Diligence Memo: ${packet.company}
 
 Stage: ${packet.stage}
@@ -541,18 +760,23 @@ ${packet.claimBoundary}`;
       $('riskMetric').textContent = packet.risks.length;
       $('questionMetric').textContent = packet.questions.length;
       $('thesisTitle').textContent = packet.thesis;
-      $('thesisText').textContent = `${packet.company} may be worth a deeper call if the team can prove a repeated workflow, a budget owner, and a measurable before/after outcome.`;
-      $('guardrailPill').textContent = packet.guardrail.capped ? 'score capped' : 'cap clear';
+      $('thesisText').textContent = currentLang === 'ja'
+        ? `${packet.company} は、反復する業務、予算を持つ買い手、測定できる前後比較を示せるなら、深掘り面談に進む価値があります。`
+        : `${packet.company} may be worth a deeper call if the team can prove a repeated workflow, a budget owner, and a measurable before/after outcome.`;
+      $('guardrailPill').textContent = currentLang === 'ja'
+        ? (packet.guardrail.capped ? 'スコア上限あり' : '上限内')
+        : (packet.guardrail.capped ? 'score capped' : 'cap clear');
       $('guardrailPill').className = `pill ${packet.guardrail.capped ? 'warn' : 'good'}`;
-      $('guardrailTitle').textContent = packet.guardrail.capped
-        ? 'Score was capped by evidence quality'
-        : 'Score is within the evidence cap';
+      $('guardrailTitle').textContent = currentLang === 'ja'
+        ? (packet.guardrail.capped ? '証拠の質によりスコアに上限をかけました' : 'スコアは証拠上限の範囲内です')
+        : (packet.guardrail.capped ? 'Score was capped by evidence quality' : 'Score is within the evidence cap');
       $('guardrailText').textContent = packet.guardrail.message;
       renderList('evidenceList', packet.evidence);
       renderList('assumptionList', packet.assumptions);
       renderCards('riskGrid', packet.risks, 'Risk');
       renderCards('questionGrid', packet.questions, 'Question');
       $('memo').textContent = memoMarkdown(packet);
+      applyLanguage(currentLang);
       return packet;
     }
 
@@ -562,9 +786,13 @@ ${packet.claimBoundary}`;
         if (!response.ok) return;
         const proof = await response.json();
         $('aiProofTitle').textContent = `${proof.model} via ${proof.route}`;
-        $('aiProofText').textContent = `Live call: ${proof.diligence_memo_live_proof ? 'yes' : 'no'} · HTTP ${proof.http_status} · tokens ${proof.total_token_count}. Boundary: ${proof.claim_boundary}`;
+        $('aiProofText').textContent = currentLang === 'ja'
+          ? `ライブ呼び出し: ${proof.diligence_memo_live_proof ? 'あり' : 'なし'} · HTTP ${proof.http_status} · トークン ${proof.total_token_count}。境界: この証拠は投資メモ作成のGemini呼び出し確認であり、投資助言や売上・顧客検証を証明するものではありません。`
+          : `Live call: ${proof.diligence_memo_live_proof ? 'yes' : 'no'} · HTTP ${proof.http_status} · tokens ${proof.total_token_count}. Boundary: ${proof.claim_boundary}`;
+        applyLanguage(currentLang);
       } catch {
         $('aiProofTitle').textContent = 'Model proof available in README';
+        applyLanguage(currentLang);
       }
     }
 
@@ -577,15 +805,26 @@ ${packet.claimBoundary}`;
         .replaceAll("'", '&#39;');
     }
 
+    document.querySelectorAll('[data-lang-button]').forEach((button) => {
+      button.addEventListener('click', () => {
+        syncSampleInputs(button.dataset.langButton);
+        applyLanguage(button.dataset.langButton);
+        render();
+        renderAiProof();
+      });
+    });
     $('buildBtn').addEventListener('click', render);
     $('copyBtn').addEventListener('click', async () => {
       const packet = render();
       await navigator.clipboard.writeText(memoMarkdown(packet));
-      $('copyBtn').textContent = 'Copied Markdown Memo';
-      setTimeout(() => { $('copyBtn').textContent = 'Copy Markdown Memo'; }, 1400);
+      $('copyBtn').textContent = currentLang === 'ja' ? 'コピーしました' : 'Copied Markdown Memo';
+      setTimeout(() => {
+        $('copyBtn').textContent = currentLang === 'ja' ? 'Markdownメモをコピー' : 'Copy Markdown Memo';
+      }, 1400);
     });
     render();
     renderAiProof();
+    applyLanguage('en');
   </script>
 </body>
 </html>

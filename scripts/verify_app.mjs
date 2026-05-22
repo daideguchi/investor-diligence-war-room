@@ -74,6 +74,23 @@ try {
     throw new Error('AI proof did not load expected claim boundary');
   }
 
+  await page.getByRole('button', { name: '日本語' }).click();
+  await page.waitForFunction(() => document.querySelector('#aiProofText')?.innerText.includes('ライブ呼び出し'));
+  const japaneseBody = await page.locator('body').innerText();
+  if (!japaneseBody.includes('投資デューデリジェンス司令室') || !japaneseBody.includes('速さが過信に変わらない')) {
+    throw new Error('Japanese UI toggle failed');
+  }
+  for (const marker of ['証拠スコアの安全装置', 'メモのみ', 'リスク 1', '次に聞く投資家質問', '主張の境界', 'ライブ呼び出し']) {
+    if (!japaneseBody.includes(marker)) {
+      throw new Error(`Japanese dynamic UI missing marker: ${marker}`);
+    }
+  }
+  for (const leaked of ['Evidence Score Guardrail', 'notes only', 'Next Investor Questions', 'Raw score ', 'Live call:']) {
+    if (japaneseBody.includes(leaked)) {
+      throw new Error(`Japanese UI leaked English dynamic text: ${leaked}`);
+    }
+  }
+
   await page.screenshot({ path: path.join(root, 'media', 'investor-diligence-war-room-full.png'), fullPage: true });
   console.log('investor_diligence_verify_ok');
   console.log(`cards=${cards}`);
