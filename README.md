@@ -45,6 +45,13 @@ Judge signal:
 This is not just "AI writes an investor memo." The winning mechanism is the evidence score guardrail: the product can move fast while visibly preventing weak proof from looking stronger than it is.
 ```
 
+## 30-Second Review Path
+
+1. Read the one-sentence pitch to understand who this helps.
+2. Open the live app and press `Build Diligence Memo`.
+3. Check the evidence cap, red flags, and next diligence questions.
+4. Confirm the boundary: this is a review memo, not investment advice or fake validation.
+
 ## What It Does
 
 - Takes company, website, stage, market, and raw notes.
