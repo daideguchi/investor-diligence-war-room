@@ -4,6 +4,8 @@ Live app: https://daideguchi.github.io/investor-diligence-war-room/
 
 Source code: https://github.com/daideguchi/investor-diligence-war-room
 
+Demo video: https://github.com/daideguchi/investor-diligence-war-room/releases/download/v0.1-submission/investor-diligence-war-room-demo-narrated.mp4
+
 ## Inspiration
 
 Early diligence is messy. A reviewer may have a company website, a founder claim, a market guess, and a few notes from a call. AI can draft a polished memo quickly, but polished is not the same as trustworthy. A confident AI paragraph can blur the line between evidence, assumption, and wishful thinking.

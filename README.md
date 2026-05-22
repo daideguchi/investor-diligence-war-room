@@ -8,6 +8,7 @@ It is being built for Build & Pitch w/ Raylu.
 
 - Live app: https://daideguchi.github.io/investor-diligence-war-room/
 - GitHub repo: https://github.com/daideguchi/investor-diligence-war-room
+- Release assets: https://github.com/daideguchi/investor-diligence-war-room/releases/tag/v0.1-submission
 - Submission status: not final-submitted yet
 
 ## Judge Quick Read
@@ -50,6 +51,12 @@ Current local demo asset:
 
 ```text
 media/investor-diligence-war-room-demo-narrated.mp4
+```
+
+Public release download:
+
+```text
+https://github.com/daideguchi/investor-diligence-war-room/releases/download/v0.1-submission/investor-diligence-war-room-demo-narrated.mp4
 ```
 
 This is the current narrated review asset for YouTube/Devpost packaging. It includes:
