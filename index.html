@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investor Diligence War Room</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef2f1;
+      --surface: #ffffff;
+      --surface-2: #f7f9f8;
+      --ink: #18211f;
+      --muted: #5f6f6b;
+      --line: #d7dfdc;
+      --brand: #145c4b;
+      --brand-2: #dff1ec;
+      --warn: #8c4d12;
+      --warn-bg: #fff1df;
+      --risk: #9d2b2b;
+      --risk-bg: #fde8e8;
+      --good: #1f6b3c;
+      --good-bg: #e5f4e9;
+      --dark: #10201c;
+      --shadow: 0 1px 2px rgba(16, 32, 28, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    header {
+      padding: 22px 28px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 24px; letter-spacing: 0; }
+    .tagline { color: var(--muted); margin-top: 4px; max-width: 880px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--brand-2);
+      color: var(--brand);
+      font-weight: 700;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(320px, 390px) 1fr;
+      gap: 16px;
+      padding: 16px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    section, aside {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    aside { padding: 16px; align-self: start; position: sticky; top: 12px; }
+    .stack { display: grid; gap: 12px; }
+    .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); font-weight: 700; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 10px 11px;
+      min-height: 40px;
+    }
+    textarea { min-height: 118px; resize: vertical; }
+    button {
+      border: 1px solid var(--brand);
+      background: var(--brand);
+      color: white;
+      min-height: 40px;
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button.secondary { background: #fff; color: var(--brand); }
+    button:focus, input:focus, textarea:focus, select:focus {
+      outline: 3px solid rgba(20, 92, 75, 0.22);
+      outline-offset: 1px;
+    }
+    .hero-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 94px;
+      box-shadow: var(--shadow);
+    }
+    .metric strong { display: block; font-size: 24px; margin-bottom: 4px; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .workspace { padding: 16px; display: grid; gap: 16px; }
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .panel-title h2 { font-size: 17px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-2);
+      padding: 12px;
+      min-height: 108px;
+    }
+    .card h3 { font-size: 14px; margin-bottom: 6px; }
+    .card p, .card li { color: var(--muted); font-size: 13px; }
+    ul { margin: 0; padding-left: 18px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+    }
+    .pill.good { color: var(--good); background: var(--good-bg); border-color: #b9ddc3; }
+    .pill.warn { color: var(--warn); background: var(--warn-bg); border-color: #efd0aa; }
+    .pill.risk { color: var(--risk); background: var(--risk-bg); border-color: #efbcbc; }
+    .memo {
+      background: var(--dark);
+      color: #dff6ee;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      min-height: 280px;
+      white-space: pre-wrap;
+      overflow: auto;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .dial {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--brand) calc(var(--score) * 1%), #dfe7e4 0);
+      position: relative;
+      font-weight: 900;
+      font-size: 26px;
+    }
+    .dial::before {
+      content: "";
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      background: var(--surface);
+      border-radius: 50%;
+    }
+    .dial span { position: relative; z-index: 1; }
+    .small { font-size: 12px; color: var(--muted); }
+    .footer-note {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      padding: 0 4px 8px;
+      font-size: 12px;
+    }
+    @media (max-width: 920px) {
+      main { grid-template-columns: 1fr; }
+      aside { position: static; }
+      .hero-strip, .grid-3, .grid-2, .row { grid-template-columns: 1fr; }
+      header { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Investor Diligence War Room</h1>
+      <p class="tagline">A fast investor workflow for turning messy startup notes into an evidence-aware memo, red-flag map, and next diligence plan.</p>
+    </div>
+    <span class="badge">Raylu build candidate</span>
+  </header>
+
+  <main>
+    <div class="hero-strip" aria-label="current proof snapshot">
+      <div class="metric"><strong id="scoreMetric">74</strong><span>investability hypothesis</span></div>
+      <div class="metric"><strong id="evidenceMetric">5</strong><span>evidence receipts</span></div>
+      <div class="metric"><strong id="riskMetric">4</strong><span>red flags to diligence</span></div>
+      <div class="metric"><strong id="questionMetric">6</strong><span>next investor questions</span></div>
+    </div>
+
+    <aside>
+      <div class="stack">
+        <div class="panel-title">
+          <h2>Company Intake</h2>
+          <span class="pill warn">human approval</span>
+        </div>
+        <label>
+          Company or product
+          <input id="company" value="ExampleCo">
+        </label>
+        <label>
+          Website / source
+          <input id="website" value="https://example.com">
+        </label>
+        <div class="row">
+          <label>
+            Stage
+            <select id="stage">
+              <option>pre-seed</option>
+              <option selected>seed</option>
+              <option>series A</option>
+              <option>growth</option>
+            </select>
+          </label>
+          <label>
+            Market
+            <input id="market" value="AI workflow governance">
+          </label>
+        </div>
+        <label>
+          Raw notes
+          <textarea id="notes">Team sells an AI operations console for companies that need evidence-aware workflows, human approval gates, and audit-ready launch decisions. Early users are small AI teams and solo founders. Main risk is whether teams pay before compliance pressure becomes urgent.</textarea>
+        </label>
+        <label>
+          Evidence mode
+          <select id="evidenceMode">
+            <option selected>notes only</option>
+            <option>public website plus notes</option>
+            <option>customer call notes</option>
+            <option>data room summary</option>
+          </select>
+        </label>
+        <button id="buildBtn">Build Diligence Memo</button>
+        <button class="secondary" id="copyBtn">Copy Markdown Memo</button>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <div>
+        <div class="panel-title">
+          <h2>Investment Snapshot</h2>
+          <span class="pill good">working hypothesis</span>
+        </div>
+        <div class="score">
+          <div class="dial" id="dial" style="--score:74"><span id="scoreValue">74</span></div>
+          <div class="card">
+            <h3 id="thesisTitle">Credible wedge into AI governance operations</h3>
+            <p id="thesisText">The company is worth a deeper call if it can show a narrow buyer, a repeated painful workflow, and proof that teams will pay to reduce launch and compliance risk.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-title">
+          <h2>Evidence vs Assumptions</h2>
+          <span class="pill">no fake validation</span>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Evidence Receipts</h3>
+            <ul id="evidenceList"></ul>
+          </div>
+          <div class="card">
+            <h3>Assumptions To Verify</h3>
+            <ul id="assumptionList"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel-title">
+          <h2>Risk Map</h2>
+          <span class="pill risk">do not skip</span>
+        </div>
+        <div class="grid-3" id="riskGrid"></div>
+      </div>
+
+      <div>
+        <div class="panel-title">
+          <h2>Next Investor Questions</h2>
+          <span class="pill good">call plan</span>
+        </div>
+        <div class="grid-3" id="questionGrid"></div>
+      </div>
+
+      <div>
+        <div class="panel-title">
+          <h2>Exportable Memo</h2>
+          <span class="pill warn">human signs off</span>
+        </div>
+        <pre class="memo" id="memo"></pre>
+      </div>
+    </section>
+
+    <p class="footer-note">Claim boundary: this app creates a diligence hypothesis from user-provided notes. It does not claim verified revenue, customer validation, live web extraction, or investment advice unless those proof sources are attached.</p>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const patterns = {
+      evidence: [
+        ['team', 'Team and operator workflow are mentioned in the source notes.'],
+        ['user', 'User or customer language appears in the source notes.'],
+        ['pay', 'Payment willingness is directly mentioned as a question or signal.'],
+        ['risk', 'The source notes already include risk language.'],
+        ['workflow', 'The product appears to own a repeated workflow, not only a static report.'],
+        ['compliance', 'Compliance or audit pressure appears as a possible urgency driver.']
+      ],
+      risks: [
+        ['buyer', 'Unclear buyer: confirm who owns budget and urgency.'],
+        ['pay', 'Payment risk: willingness to pay is not proven.'],
+        ['competition', 'Competitive risk: incumbents may bundle the workflow.'],
+        ['data', 'Data risk: evidence quality depends on source notes.'],
+        ['compliance', 'Timing risk: compliance pressure may not be urgent yet.']
+      ]
+    };
+
+    function scoreCompany(notes, stage) {
+      const lower = notes.toLowerCase();
+      let score = 50;
+      ['workflow', 'team', 'customer', 'user', 'pay', 'risk', 'governance', 'audit', 'evidence'].forEach((word) => {
+        if (lower.includes(word)) score += 4;
+      });
+      if (stage === 'seed') score += 4;
+      if (stage === 'growth') score -= 4;
+      if (!lower.includes('pay') && !lower.includes('revenue')) score -= 8;
+      return Math.max(22, Math.min(91, score));
+    }
+
+    function bulletsFrom(patternList, notes, fallback) {
+      const lower = notes.toLowerCase();
+      const matches = patternList
+        .filter(([word]) => lower.includes(word))
+        .map(([, text]) => text);
+      return matches.length ? matches : fallback;
+    }
+
+    function buildPacket() {
+      const company = $('company').value.trim() || 'Unnamed company';
+      const website = $('website').value.trim() || 'not provided';
+      const stage = $('stage').value;
+      const market = $('market').value.trim() || 'unspecified market';
+      const notes = $('notes').value.trim() || 'No notes provided.';
+      const evidenceMode = $('evidenceMode').value;
+      const score = scoreCompany(notes, stage);
+
+      const evidence = bulletsFrom(patterns.evidence, notes, [
+        'Only user-provided notes are available.',
+        'No customer, revenue, or live web proof is attached yet.'
+      ]);
+      const assumptions = [
+        'The buyer has a painful recurring workflow.',
+        'The product reduces time, risk, or missed diligence questions enough to justify payment.',
+        'The team can produce proof beyond a polished demo.',
+        'The workflow can be repeated across multiple companies or funds.'
+      ];
+      const risks = bulletsFrom(patterns.risks, notes, [
+        'Customer validation is not attached.',
+        'Revenue is not attached.',
+        'Competitive landscape is not attached.',
+        'Data quality depends on the source notes.'
+      ]);
+      const questions = [
+        `Who is the first buyer for ${company}, and what budget do they control?`,
+        'What job is currently done manually, and how many hours does it consume?',
+        'What proof shows a user would pay this month?',
+        'Which part of the memo is evidence, and which part is assumption?',
+        'What competitor or internal workflow would block adoption?',
+        'What metric improves after one week of use?'
+      ];
+      const thesis = score >= 74
+        ? 'Credible wedge into a painful investor or operator workflow'
+        : score >= 58
+          ? 'Promising but proof-light diligence candidate'
+          : 'Interesting idea, but not investable without sharper proof';
+      const claimBoundary = 'Working diligence hypothesis only. Not investment advice. No verified customer, revenue, or live-web claims unless attached as evidence receipts.';
+
+      return { company, website, stage, market, notes, evidenceMode, score, thesis, evidence, assumptions, risks, questions, claimBoundary };
+    }
+
+    function renderList(id, items) {
+      $(id).innerHTML = items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+    }
+
+    function renderCards(id, items, type) {
+      $(id).innerHTML = items.map((item, idx) => `
+        <div class="card">
+          <h3>${type} ${idx + 1}</h3>
+          <p>${escapeHtml(item)}</p>
+        </div>
+      `).join('');
+    }
+
+    function memoMarkdown(packet) {
+      return `# Investor Diligence Memo: ${packet.company}
+
+Stage: ${packet.stage}
+Market: ${packet.market}
+Source: ${packet.website}
+Evidence mode: ${packet.evidenceMode}
+Investability hypothesis: ${packet.score}/100
+
+## Thesis
+${packet.thesis}
+
+## Evidence Receipts
+${packet.evidence.map((item) => `- ${item}`).join('\n')}
+
+## Assumptions To Verify
+${packet.assumptions.map((item) => `- ${item}`).join('\n')}
+
+## Red Flags
+${packet.risks.map((item) => `- ${item}`).join('\n')}
+
+## Next Investor Questions
+${packet.questions.map((item) => `- ${item}`).join('\n')}
+
+## Claim Boundary
+${packet.claimBoundary}`;
+    }
+
+    function render() {
+      const packet = buildPacket();
+      $('scoreMetric').textContent = packet.score;
+      $('scoreValue').textContent = packet.score;
+      $('dial').style.setProperty('--score', packet.score);
+      $('evidenceMetric').textContent = packet.evidence.length;
+      $('riskMetric').textContent = packet.risks.length;
+      $('questionMetric').textContent = packet.questions.length;
+      $('thesisTitle').textContent = packet.thesis;
+      $('thesisText').textContent = `${packet.company} may be worth a deeper call if the team can prove a repeated workflow, a budget owner, and a measurable before/after outcome.`;
+      renderList('evidenceList', packet.evidence);
+      renderList('assumptionList', packet.assumptions);
+      renderCards('riskGrid', packet.risks, 'Risk');
+      renderCards('questionGrid', packet.questions, 'Question');
+      $('memo').textContent = memoMarkdown(packet);
+      return packet;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    $('buildBtn').addEventListener('click', render);
+    $('copyBtn').addEventListener('click', async () => {
+      const packet = render();
+      await navigator.clipboard.writeText(memoMarkdown(packet));
+      $('copyBtn').textContent = 'Copied Markdown Memo';
+      setTimeout(() => { $('copyBtn').textContent = 'Copy Markdown Memo'; }, 1400);
+    });
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "provider": "google_gemini",
+  "route": "vertex_ai_generate_content",
+  "model": "gemini-2.5-flash",
+  "project": "pj260519",
+  "location": "us-central1",
+  "ran_at_utc": "2026-05-22T00:38:20.072Z",
+  "prompt_purpose": "investor diligence memo draft",
+  "contains_secret": false,
+  "http_status": 200,
+  "live_call_count": 1,
+  "diligence_memo_live_proof": true,
+  "total_token_count": 408,
+  "sample_excerpt": "investor diligence memo draft: Here is a first-pass diligence memo for Example",
+  "checks": [
+    {
+      "prompt_purpose": "investor diligence memo draft",
+      "http_status": 200,
+      "traffic_type": "ON_DEMAND",
+      "prompt_token_count": 152,
+      "candidates_token_count": 10,
+      "total_token_count": 408,
+      "sample_excerpt": "Here is a first-pass diligence memo for Example"
+    }
+  ],
+  "claim_boundary": "This proves one live Gemini call for investor memo drafting only. It does not prove investment advice, verified revenue, verified customers, customer adoption, or live web extraction."
+}
