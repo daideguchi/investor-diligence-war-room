@@ -323,6 +323,17 @@
         </div>
         <pre class="memo" id="memo"></pre>
       </div>
+
+      <div>
+        <div class="panel-title">
+          <h2>AI Proof</h2>
+          <span class="pill good">Gemini smoke test</span>
+        </div>
+        <div class="card">
+          <h3 id="aiProofTitle">Model proof loading</h3>
+          <p id="aiProofText">The public app displays a sanitized model-call proof when the proof JSON is available. The proof never includes API keys or private service-account content.</p>
+        </div>
+      </div>
     </section>
 
     <p class="footer-note">Claim boundary: this app creates a diligence hypothesis from user-provided notes. It does not claim verified revenue, customer validation, live web extraction, or investment advice unless those proof sources are attached.</p>
@@ -471,6 +482,18 @@ ${packet.claimBoundary}`;
       return packet;
     }
 
+    async function renderAiProof() {
+      try {
+        const response = await fetch('media/gemini-live-diligence-proof.json', { cache: 'no-store' });
+        if (!response.ok) return;
+        const proof = await response.json();
+        $('aiProofTitle').textContent = `${proof.model} via ${proof.route}`;
+        $('aiProofText').textContent = `Live call: ${proof.diligence_memo_live_proof ? 'yes' : 'no'} · HTTP ${proof.http_status} · tokens ${proof.total_token_count}. Boundary: ${proof.claim_boundary}`;
+      } catch {
+        $('aiProofTitle').textContent = 'Model proof available in README';
+      }
+    }
+
     function escapeHtml(value) {
       return String(value)
         .replaceAll('&', '&amp;')
@@ -488,6 +511,7 @@ ${packet.claimBoundary}`;
       setTimeout(() => { $('copyBtn').textContent = 'Copy Markdown Memo'; }, 1400);
     });
     render();
+    renderAiProof();
   </script>
 </body>
 </html>

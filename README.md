@@ -37,6 +37,7 @@ Investor Diligence War Room creates a memo while separating evidence receipts, a
 - Separates evidence from assumptions.
 - Builds red flags and next diligence questions.
 - Exports a Markdown memo.
+- Displays a sanitized Gemini live-call proof when the proof JSON is available.
 - Keeps a clear claim boundary.
 
 ## Screenshot
@@ -72,6 +73,8 @@ The proof file is written to:
 ```text
 media/gemini-live-diligence-proof.json
 ```
+
+The public app reads that sanitized proof and displays the model, route, HTTP status, token count, and claim boundary. It does not expose credentials.
 
 ## What It Does Not Claim
 
