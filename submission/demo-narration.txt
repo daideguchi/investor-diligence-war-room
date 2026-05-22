@@ -1,0 +1,14 @@
+Investor Diligence War Room is built for one painful moment: an investor has messy startup notes, and needs a useful memo fast.
+
+The app does not pretend that AI has verified the company. It keeps the score as a working hypothesis, then separates evidence, assumptions, red flags, and the next questions a human should ask.
+
+Here I enter a startup example and build the memo. The result is not a generic chatbot answer. It is a structured diligence packet.
+
+The important part is the boundary. Revenue, customers, and market claims stay unverified unless evidence is attached.
+
+The memo is exportable, so a scout or VC analyst can move quickly, while still keeping human judgment in control.
+
+At the bottom, the app shows a sanitized Gemini proof. A real model call happened, but secrets are not exposed, and the app still avoids investment advice.
+
+That is the product: AI speed, evidence discipline, and human approval in one room.
+

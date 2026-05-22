@@ -49,10 +49,21 @@ Investor Diligence War Room creates a memo while separating evidence receipts, a
 Current local demo asset:
 
 ```text
-media/investor-diligence-war-room-demo.webm
+media/investor-diligence-war-room-demo-narrated.mp4
 ```
 
-This is a silent product walkthrough asset for review and later YouTube/Devpost packaging.
+This is the current narrated review asset for YouTube/Devpost packaging. It includes:
+
+- 1440x1080 screen recording
+- English narration
+- embedded English subtitle track
+- generated thumbnail at `media/investor-diligence-war-room-demo-thumb.png`
+
+The silent raw walkthrough is also kept at:
+
+```text
+media/investor-diligence-war-room-demo.webm
+```
 
 ## AI Proof
 
@@ -107,6 +118,7 @@ open index.html
 ```bash
 node scripts/verify_app.mjs
 python3 scripts/verify_claim_boundary.py
+python3 scripts/verify_demo_assets.py
 python3 scripts/verify_no_secrets.py
 ```
 

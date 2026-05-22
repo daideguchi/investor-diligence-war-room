@@ -1,0 +1,20 @@
+[Script Info]
+Title: Investor Diligence War Room Demo
+ScriptType: v4.00+
+PlayResX: 1440
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,34,&H00FFFFFF,&H00FFFFFF,&H0010202A,&HAA10202A,-1,0,0,0,100,100,0,0,3,1,0,2,70,70,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:07.00,Default,,0,0,0,,Investor Diligence War Room turns messy startup notes into an evidence-aware memo.
+Dialogue: 0,0:00:07.00,0:00:16.00,Default,,0,0,0,,It does not pretend AI has verified the company. The score is only a working hypothesis.
+Dialogue: 0,0:00:16.00,0:00:25.00,Default,,0,0,0,,The workflow separates evidence, assumptions, red flags, and the next questions a human should ask.
+Dialogue: 0,0:00:25.00,0:00:35.00,Default,,0,0,0,,This is not a generic chatbot answer. It is a structured diligence packet for investors and scouts.
+Dialogue: 0,0:00:35.00,0:00:45.00,Default,,0,0,0,,Revenue, customers, and market claims stay unverified unless evidence is attached.
+Dialogue: 0,0:00:45.00,0:00:55.00,Default,,0,0,0,,The memo is exportable, so analysts move quickly while keeping human judgment in control.
+Dialogue: 0,0:00:55.00,0:01:07.00,Default,,0,0,0,,The app also shows a sanitized Gemini proof: a real model call happened, with no secrets exposed.
+Dialogue: 0,0:01:07.00,0:01:15.00,Default,,0,0,0,,AI speed, evidence discipline, and human approval in one room.
