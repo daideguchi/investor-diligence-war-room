@@ -4,7 +4,9 @@ Live app: https://daideguchi.github.io/investor-diligence-war-room/
 
 Source code: https://github.com/daideguchi/investor-diligence-war-room
 
-Demo video: https://github.com/daideguchi/investor-diligence-war-room/releases/download/v0.1-submission/investor-diligence-war-room-demo-narrated.mp4
+Demo video: https://youtu.be/_SEP1NyhY1E
+
+Backup demo asset: https://github.com/daideguchi/investor-diligence-war-room/releases/download/v0.1-submission/investor-diligence-war-room-demo-narrated.mp4
 
 ## Inspiration
 
