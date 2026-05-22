@@ -35,7 +35,7 @@ duration = float(probe["format"]["duration"])
 size = int(probe["format"]["size"])
 stream_types = {stream["codec_type"] for stream in probe["streams"]}
 
-if not 50 <= duration <= 75:
+if not 120 <= duration <= 180:
     raise SystemExit(f"unexpected demo duration: {duration}")
 if size < 1_000_000:
     raise SystemExit(f"demo video too small: {size}")

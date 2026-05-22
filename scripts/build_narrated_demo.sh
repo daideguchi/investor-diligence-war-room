@@ -8,7 +8,7 @@ if [[ "${SKIP_RECORD:-0}" != "1" ]]; then
   npm run demo:record
 fi
 
-say -v Samantha -r 168 -f submission/demo-narration.txt -o media/demo-narration.aiff
+say -v Samantha -r 150 -f submission/demo-narration.txt -o media/demo-narration.aiff
 ffmpeg -y -i media/demo-narration.aiff -ar 48000 -ac 2 media/demo-narration.wav >/tmp/investor_demo_audio.log 2>&1
 
 ffmpeg -y \

@@ -50,31 +50,31 @@ const context = await browser.newContext({
 const page = await context.newPage();
 await page.goto(`http://127.0.0.1:${port}/`);
 await page.waitForSelector('#buildBtn');
-await page.waitForTimeout(5000);
+await page.waitForTimeout(11000);
 
 await page.fill('#company', 'Shiproom OS');
 await page.fill('#website', 'https://github.com/daideguchi/shiproom-os');
 await page.selectOption('#stage', 'seed');
 await page.fill('#market', 'AI launch governance');
-await page.waitForTimeout(2500);
+await page.waitForTimeout(6000);
 await page.fill(
   '#notes',
   'Team built a launch governance room for AI teams that need proof checklists, human approval, fallback planning, and public release packets. Early signal is strong for solo builders and small AI teams. Main diligence risk is whether teams will pay before an incident or compliance requirement forces the workflow.'
 );
 await page.selectOption('#evidenceMode', 'public website plus notes');
-await page.waitForTimeout(3500);
+await page.waitForTimeout(9000);
 await page.click('#buildBtn');
-await page.waitForTimeout(6500);
+await page.waitForTimeout(15000);
 await page.getByRole('heading', { name: 'Evidence vs Assumptions' }).scrollIntoViewIfNeeded();
-await page.waitForTimeout(6500);
+await page.waitForTimeout(15000);
 await page.getByRole('heading', { name: 'Risk Map' }).scrollIntoViewIfNeeded();
-await page.waitForTimeout(5000);
+await page.waitForTimeout(14000);
 await page.getByRole('heading', { name: 'Next Investor Questions' }).scrollIntoViewIfNeeded();
-await page.waitForTimeout(6500);
+await page.waitForTimeout(16000);
 await page.locator('#memo').scrollIntoViewIfNeeded();
-await page.waitForTimeout(9000);
+await page.waitForTimeout(21000);
 await page.getByRole('heading', { name: 'AI Proof' }).scrollIntoViewIfNeeded();
-await page.waitForTimeout(9000);
+await page.waitForTimeout(22000);
 
 const video = page.video();
 await context.close();

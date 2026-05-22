@@ -6,9 +6,9 @@ Source code: https://github.com/daideguchi/investor-diligence-war-room
 
 ## Inspiration
 
-Most investor memos fail in one of two ways: they take too long to write, or they sound too confident too early. AI can help with speed, but it can also blur the line between a real signal and a guess.
+Early diligence is messy. A reviewer may have a company website, a founder claim, a market guess, and a few notes from a call. AI can draft a polished memo quickly, but polished is not the same as trustworthy. A confident AI paragraph can blur the line between evidence, assumption, and wishful thinking.
 
-Investor Diligence War Room is my answer to that problem. It is not just an AI memo writer. It is a diligence workspace that separates evidence, assumptions, red flags, and next questions before a human investor decides what to believe.
+Investor Diligence War Room is built around that boundary. It helps investors move faster without pretending that weak notes are verified proof.
 
 ## What It Does
 
@@ -21,11 +21,11 @@ The app turns company notes into an investor-ready diligence packet:
 - next investor questions
 - exportable Markdown memo
 
-The score is deliberately labeled as a working hypothesis. It is not investment advice and not a final decision.
+The score is deliberately labeled as a working hypothesis. It is not investment advice and not a final decision. Revenue, customers, and market claims stay unverified unless proof is attached.
 
 ## How I Built It
 
-I built the first version as a static web app with HTML, CSS, and JavaScript so the workflow is inspectable and easy to run. The current public MVP uses deterministic logic to make the evidence boundary clear, and a sanitized Vertex AI Gemini smoke proof shows the model-backed memo drafting path. The next version can add source-cited live web extraction while preserving the same human-approval structure.
+I built the first version as a static web app with HTML, CSS, and JavaScript so the workflow is inspectable and easy to run. The public MVP uses deterministic logic to make the evidence boundary clear, and a sanitized Vertex AI Gemini smoke proof shows the model-backed memo drafting path. The app displays the model, route, HTTP status, token count, and claim boundary without exposing credentials.
 
 ## Challenges
 
@@ -37,6 +37,8 @@ The biggest challenge was avoiding a generic AI chatbot. The useful product is n
 - Made evidence and assumptions visible.
 - Added red flags and next questions.
 - Added exportable memo output.
+- Added a sanitized Gemini live-call proof.
+- Added a two-minute narrated demo asset.
 - Kept the claim boundary explicit.
 
 ## What's Next

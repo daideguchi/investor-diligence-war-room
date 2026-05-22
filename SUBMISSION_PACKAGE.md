@@ -12,21 +12,27 @@ Evidence-aware investment memos from messy startup notes.
 
 - Live app: https://daideguchi.github.io/investor-diligence-war-room/
 - GitHub repo: https://github.com/daideguchi/investor-diligence-war-room
-- Demo video asset: `media/investor-diligence-war-room-demo.webm`
+- Demo video asset: `media/investor-diligence-war-room-demo-narrated.mp4`
 
-## Short Pitch
+## 250-500 Word Project Description
 
-Investor Diligence War Room helps investors turn scattered startup notes into an evidence-aware memo. It separates evidence, assumptions, red flags, and next diligence questions so AI speeds up the work without hiding uncertainty.
+Investor Diligence War Room helps investors, scouts, accelerators, and angels turn scattered startup notes into an evidence-aware first-pass diligence memo.
 
-## Inspiration
+The problem is simple: early diligence is messy. A reviewer may have a company website, a founder claim, a market guess, and a few notes from a call. AI can draft a polished memo quickly, but polished is not the same as trustworthy. A confident AI paragraph can blur the line between evidence, assumption, and wishful thinking.
 
-AI can write a polished investment memo in seconds. That is useful, but also risky. A memo can sound confident even when it is built on weak notes.
+This product is built around that boundary.
 
-I wanted to build the missing layer: a diligence room that makes the difference between evidence and assumption visible.
+The app takes a company name, website, stage, market, and raw notes. It produces an investability hypothesis, evidence receipts, assumptions to verify, red flags, next investor questions, and an exportable Markdown memo. The score is deliberately labeled as a working hypothesis, not an investment decision. Revenue, customers, and market claims stay unverified unless proof is attached.
+
+The novel insight is that investor AI tooling should not only make memos faster. It should make uncertainty easier to see. The workflow is not a generic chatbot; it is a structured diligence room that turns the output into a call plan and review artifact.
+
+The current build is a static web app so judges can inspect the workflow immediately. It also includes a sanitized Vertex AI Gemini proof showing that a real model-backed drafting path has been tested. The app displays the model, route, HTTP status, token count, and claim boundary without exposing credentials.
+
+The business wedge is practical: scouts and investors already work in memos, and the painful job is turning messy notes into something reviewable. Investor Diligence War Room speeds that up while keeping human judgment in control.
 
 ## What It Does
 
-The app takes a company name, website, stage, market, and raw notes. It produces:
+The app produces:
 
 - an investability hypothesis
 - evidence receipts

@@ -1,14 +1,19 @@
-Investor Diligence War Room is built for one painful moment: an investor has messy startup notes, and needs a useful memo fast.
+Investor Diligence War Room is built for one painful moment.
 
-The app does not pretend that AI has verified the company. It keeps the score as a working hypothesis, then separates evidence, assumptions, red flags, and the next questions a human should ask.
+An investor, scout, or accelerator operator has messy startup notes. There is a website, a founder claim, maybe a few customer hints, and a lot of uncertainty. They need a useful first-pass memo fast, but they cannot afford a confident AI answer that hides what is still unproven.
 
-Here I enter a startup example and build the memo. The result is not a generic chatbot answer. It is a structured diligence packet.
+This product turns those notes into an evidence-aware diligence packet.
 
-The important part is the boundary. Revenue, customers, and market claims stay unverified unless evidence is attached.
+The score is deliberately labeled as an investability hypothesis. It is not investment advice. It is not a final decision. The point is to move faster while keeping the human investor in control.
 
-The memo is exportable, so a scout or VC analyst can move quickly, while still keeping human judgment in control.
+Here I enter a startup example and build the memo. The app separates evidence receipts from assumptions. That distinction is the core product. If revenue, customer adoption, or market proof is not attached, the app does not pretend it is verified.
 
-At the bottom, the app shows a sanitized Gemini proof. A real model call happened, but secrets are not exposed, and the app still avoids investment advice.
+Next, the risk map highlights what could break the investment case. Payment willingness, buyer urgency, competition, data quality, and timing are not hidden inside a polished paragraph. They become explicit diligence work.
 
-That is the product: AI speed, evidence discipline, and human approval in one room.
+The next-question panel turns the memo into a call plan. A scout can ask who owns the budget, what workflow is currently manual, what proof shows someone would pay this month, and which claims are evidence versus assumptions.
 
+Then the memo can be exported. That matters because investors already work in memos. The product does not force them into a chat thread. It gives them a structured artifact they can review, edit, and share.
+
+At the bottom, the app shows a sanitized Gemini proof. A real model call happened through Vertex AI. The public proof shows the model, route, HTTP status, and token count, but it does not expose secrets.
+
+The bigger idea is simple: AI can accelerate diligence, but the winning workflow is not blind automation. It is AI speed, evidence discipline, and human approval in one room.

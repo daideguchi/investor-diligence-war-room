@@ -10,11 +10,11 @@ Style: Default,Arial,34,&H00FFFFFF,&H00FFFFFF,&H0010202A,&HAA10202A,-1,0,0,0,100
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:00:07.00,Default,,0,0,0,,Investor Diligence War Room turns messy startup notes into an evidence-aware memo.
-Dialogue: 0,0:00:07.00,0:00:16.00,Default,,0,0,0,,It does not pretend AI has verified the company. The score is only a working hypothesis.
-Dialogue: 0,0:00:16.00,0:00:25.00,Default,,0,0,0,,The workflow separates evidence, assumptions, red flags, and the next questions a human should ask.
-Dialogue: 0,0:00:25.00,0:00:35.00,Default,,0,0,0,,This is not a generic chatbot answer. It is a structured diligence packet for investors and scouts.
-Dialogue: 0,0:00:35.00,0:00:45.00,Default,,0,0,0,,Revenue, customers, and market claims stay unverified unless evidence is attached.
-Dialogue: 0,0:00:45.00,0:00:55.00,Default,,0,0,0,,The memo is exportable, so analysts move quickly while keeping human judgment in control.
-Dialogue: 0,0:00:55.00,0:01:07.00,Default,,0,0,0,,The app also shows a sanitized Gemini proof: a real model call happened, with no secrets exposed.
-Dialogue: 0,0:01:07.00,0:01:15.00,Default,,0,0,0,,AI speed, evidence discipline, and human approval in one room.
+Dialogue: 0,0:00:00.00,0:00:15.00,Default,,0,0,0,,Investor Diligence War Room is built for one painful moment: messy startup notes need to become a useful memo fast.
+Dialogue: 0,0:00:15.00,0:00:30.00,Default,,0,0,0,,The score is deliberately labeled as an investability hypothesis. It is not investment advice or a final decision.
+Dialogue: 0,0:00:30.00,0:00:47.00,Default,,0,0,0,,The app separates evidence receipts from assumptions, so unverified revenue or customer claims stay visible.
+Dialogue: 0,0:00:47.00,0:01:04.00,Default,,0,0,0,,The risk map highlights what could break the investment case instead of hiding it inside a polished paragraph.
+Dialogue: 0,0:01:04.00,0:01:20.00,Default,,0,0,0,,The next-question panel turns the memo into a call plan for a scout, analyst, or investor.
+Dialogue: 0,0:01:20.00,0:01:36.00,Default,,0,0,0,,The output is an exportable memo, not a chat thread. It fits how investors already work.
+Dialogue: 0,0:01:36.00,0:01:54.00,Default,,0,0,0,,The app shows a sanitized Gemini proof: a real Vertex AI call happened, with no secrets exposed.
+Dialogue: 0,0:01:54.00,0:02:15.00,Default,,0,0,0,,The bigger idea is AI speed, evidence discipline, and human approval in one room.

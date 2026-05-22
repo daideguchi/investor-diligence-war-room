@@ -1,31 +1,31 @@
 1
-00:00:00,000 --> 00:00:07,000
-Investor Diligence War Room turns messy startup notes into an evidence-aware memo.
+00:00:00,000 --> 00:00:15,000
+Investor Diligence War Room is built for one painful moment: messy startup notes need to become a useful memo fast.
 
 2
-00:00:07,000 --> 00:00:16,000
-It does not pretend AI has verified the company. The score is only a working hypothesis.
+00:00:15,000 --> 00:00:30,000
+The score is deliberately labeled as an investability hypothesis. It is not investment advice or a final decision.
 
 3
-00:00:16,000 --> 00:00:25,000
-The workflow separates evidence, assumptions, red flags, and the next questions a human should ask.
+00:00:30,000 --> 00:00:47,000
+The app separates evidence receipts from assumptions, so unverified revenue or customer claims stay visible.
 
 4
-00:00:25,000 --> 00:00:35,000
-This is not a generic chatbot answer. It is a structured diligence packet for investors and scouts.
+00:00:47,000 --> 00:01:04,000
+The risk map highlights what could break the investment case instead of hiding it inside a polished paragraph.
 
 5
-00:00:35,000 --> 00:00:45,000
-Revenue, customers, and market claims stay unverified unless evidence is attached.
+00:01:04,000 --> 00:01:20,000
+The next-question panel turns the memo into a call plan for a scout, analyst, or investor.
 
 6
-00:00:43,000 --> 00:00:50,000
-The memo is exportable, so analysts move quickly while keeping human judgment in control.
+00:01:20,000 --> 00:01:36,000
+The output is an exportable memo, not a chat thread. It fits how investors already work.
 
 7
-00:00:50,000 --> 00:00:55,000
-The app also shows a sanitized Gemini proof: a real model call happened, with no secrets exposed.
+00:01:36,000 --> 00:01:54,000
+The app shows a sanitized Gemini proof: a real Vertex AI call happened, with no secrets exposed.
 
 8
-00:00:55,000 --> 00:00:56,800
-AI speed, evidence discipline, and human approval in one room.
+00:01:54,000 --> 00:02:15,000
+The bigger idea is AI speed, evidence discipline, and human approval in one room.
