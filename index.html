@@ -130,6 +130,17 @@
       outline: 3px solid rgba(20, 92, 75, 0.22);
       outline-offset: 1px;
     }
+    .metric-caption {
+      grid-column: 1 / -1;
+      margin: -2px 0 4px;
+      padding: 10px 14px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .hero-strip {
       grid-column: 1 / -1;
       display: grid;
@@ -253,6 +264,7 @@
       <p class="tagline">A fast investor workflow for turning messy startup notes into an evidence-aware memo, red-flag map, and next diligence plan.</p>
     </div>
     <div class="header-actions">
+      <span class="badge">Submitted on Devpost</span>
       <span class="badge">Raylu build candidate</span>
       <div class="lang-toggle" aria-label="Language">
         <button type="button" class="active" data-lang-button="en">EN</button>
@@ -262,6 +274,7 @@
   </header>
 
   <main>
+    <p class="metric-caption">All four numbers below are working hypotheses, not verified facts. Press Build Diligence Memo to refresh them from your notes.</p>
     <div class="hero-strip" aria-label="current proof snapshot">
       <div class="metric"><strong id="scoreMetric">74</strong><span>investability hypothesis</span></div>
       <div class="metric"><strong id="evidenceMetric">5</strong><span>evidence receipts</span></div>
@@ -443,7 +456,9 @@
       ja: {
         'Investor Diligence War Room': '投資デューデリジェンス司令室',
         'A fast investor workflow for turning messy startup notes into an evidence-aware memo, red-flag map, and next diligence plan.': '散らかったスタートアップ調査メモを、証拠を意識した投資メモ、リスク整理、次の質問に変える投資家向けワークフローです。',
-        'Raylu build candidate': 'Raylu提出候補',
+        'Submitted on Devpost': 'Devpost提出済み',
+        'Raylu build candidate': 'Raylu提出作品',
+        'All four numbers below are working hypotheses, not verified facts. Press Build Diligence Memo to refresh them from your notes.': '下の4つの数字はすべて作業仮説であり、確定した事実ではありません。投資メモを作るボタンを押すと、入力メモから更新されます。',
         'investability hypothesis': '投資可能性の仮説',
         'evidence receipts': '証拠メモ',
         'red flags to diligence': '深掘りすべきリスク',
