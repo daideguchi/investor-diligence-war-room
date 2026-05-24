@@ -6,7 +6,7 @@
 - 250-500 word project description: done
 - Live link: done
 - Runnable GitHub repo: done
-- Team info: DD / solo builder
+- Team info: solo builder
 
 ## Public Links
 
